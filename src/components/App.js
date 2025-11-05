@@ -1,9 +1,12 @@
-import React, { useState } from "react";
-import Step from "./Step";
-import "./../styles/App.css";
 
-const App = () => {
-  const [step, setStep] = useState(1);
+    import React, { useState } from "react";
+import Step from "./Step";
+
+function App() {
+  // Current step (1, 2, or 3)
+  const [currentStep, setCurrentStep] = useState(1);
+
+  // Form data state
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -16,24 +19,34 @@ const App = () => {
   // Handle input change
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setFormData({ ...formData, [id]: value });
+    setFormData((prevData) => ({
+      ...prevData,
+      [id]: value,
+    }));
   };
 
-  // Navigation handlers
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
+  // Navigate to next step
+  const nextStep = () => {
+    setCurrentStep((prev) => Math.min(prev + 1, 3));
+  };
 
-  // Final submission
-  const handleSubmit = () => {
+  // Navigate to previous step
+  const prevStep = () => {
+    setCurrentStep((prev) => Math.max(prev - 1, 1));
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
     console.log("Form Submitted:", formData);
-    alert("Form Submitted Successfully!");
+    alert("Form submitted! Check console for details.");
   };
 
   return (
-    <div id="main">
-      {/* Do not remove the main div */}
+    <div style={{ maxWidth: "400px", margin: "50px auto", textAlign: "center" }}>
+      <h2>Multi-Step Form</h2>
       <Step
-        step={step}
+        step={currentStep}
         formData={formData}
         handleChange={handleChange}
         nextStep={nextStep}
@@ -42,6 +55,6 @@ const App = () => {
       />
     </div>
   );
-};
+}
 
 export default App;
