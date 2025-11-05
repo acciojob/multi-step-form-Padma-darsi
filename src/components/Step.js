@@ -1,72 +1,80 @@
 import React from "react";
 
-const Step = ({ step, formData, handleChange, nextStep, prevStep, handleSubmit }) => {
+function Step({ step, formData, handleChange, nextStep, prevStep, handleSubmit }) {
   return (
-    <div>
-      {/* Step 1 */}
+    <form onSubmit={handleSubmit}>
       {step === 1 && (
         <div>
-          <input
-            id="first_name"
-            type="text"
-            placeholder="First Name"
-            value={formData.first_name}
-            onChange={handleChange}
-          />
-          <input
-            id="last_name"
-            type="text"
-            placeholder="Last Name"
-            value={formData.last_name}
-            onChange={handleChange}
-          />
+          <div>
+            <label htmlFor="first_name">First Name:</label>
+            <input
+              type="text"
+              id="first_name"
+              value={formData.first_name}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="last_name">Last Name:</label>
+            <input
+              type="text"
+              id="last_name"
+              value={formData.last_name}
+              onChange={handleChange}
+            />
+          </div>
         </div>
       )}
 
-      {/* Step 2 */}
       {step === 2 && (
         <div>
-          <input
-            id="model"
-            type="text"
-            placeholder="Car Model"
-            value={formData.model}
-            onChange={handleChange}
-          />
-          <input
-            id="car_price"
-            type="number"
-            placeholder="Car Price"
-            value={formData.car_price}
-            onChange={handleChange}
-          />
+          <div>
+            <label htmlFor="model">Car Model:</label>
+            <input
+              type="text"
+              id="model"
+              value={formData.model}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="car_price">Car Price:</label>
+            <input
+              type="number"
+              id="car_price"
+              value={formData.car_price}
+              onChange={handleChange}
+            />
+          </div>
         </div>
       )}
 
-      {/* Step 3 */}
       {step === 3 && (
         <div>
-          <input
-            id="card_info"
-            type="text"
-            placeholder="Card Info"
-            value={formData.card_info}
-            onChange={handleChange}
-          />
-          <input
-            id="expiry_date"
-            type="text"
-            placeholder="Expiry Date"
-            value={formData.expiry_date}
-            onChange={handleChange}
-          />
+          <div>
+            <label htmlFor="card_info">Card Info:</label>
+            <input
+              type="text"
+              id="card_info"
+              value={formData.card_info}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <label htmlFor="expiry_date">Expiry Date:</label>
+            <input
+              type="month"
+              id="expiry_date"
+              value={formData.expiry_date}
+              onChange={handleChange}
+            />
+          </div>
         </div>
       )}
 
-      {/* Navigation Buttons */}
-      <div style={{ marginTop: "10px" }}>
+      <div style={{ marginTop: "20px" }}>
         {step > 1 && (
-          <button type="button" onClick={prevStep}>
+          <button type="button" onClick={prevStep} style={{ marginRight: "10px" }}>
             Previous
           </button>
         )}
@@ -75,14 +83,10 @@ const Step = ({ step, formData, handleChange, nextStep, prevStep, handleSubmit }
             Next
           </button>
         )}
-        {step === 3 && (
-          <button type="button" onClick={handleSubmit}>
-            Submit
-          </button>
-        )}
+        {step === 3 && <button type="submit">Submit</button>}
       </div>
-    </div>
+    </form>
   );
-};
+}
 
 export default Step;
